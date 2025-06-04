@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Song } from './models/song.model';
+import { SongListComponent } from './song-list/song-list.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, SongListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -15,8 +16,9 @@ export class AppComponent implements OnInit{
   title = 'sbarra-canzoniere';
   data! : Object;
   loading! : boolean;
-  obs! : Observable<Object>
+  obs! : Observable<Song[]>
   http : HttpClient
+  vettCanzoni : Song[] = []
 
   constructor(http : HttpClient){
     this.http = http
@@ -28,10 +30,10 @@ export class AppComponent implements OnInit{
     this.obs.subscribe(this.getData)
   }
 
-  getData = (d : Object) => {
-    this.data = d
+  getData = (d : Song[]) => {
+    this.vettCanzoni = d
     this.loading = false
-    console.log(this.data)
+    console.log(this.vettCanzoni)
   }
   ngOnInit(): void {
     this.makeChiamata()
