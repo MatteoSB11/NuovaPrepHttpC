@@ -11,4 +11,8 @@ import { Song } from '../models/song.model';
 export class SongListComponent {
   @Input() canz! : Song
 
+  dettagli(){
+    console.log(" Titolo: " + this.canz.title + " Data Uscita: " + this.canz.data_uscita + " Durata: " + this.canz.durata)
+  }
+
 }
